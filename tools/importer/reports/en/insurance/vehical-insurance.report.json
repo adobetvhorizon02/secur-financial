@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/insurance/vehical-insurance",
+  "path": "en/insurance/vehical-insurance",
+  "timestamp": "2026-10-23T13:36:55.351Z",
+  "title": "Vehical Insurance",
+  "template": "eds-site",
+  "blocks": [
+    "insurance"
+  ]
+}

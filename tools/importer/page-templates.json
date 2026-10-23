@@ -1,0 +1,215 @@
+{
+  "templates": [
+    {
+      "name": "home",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/"
+    },
+    {
+      "name": "accounts",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/accounts"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/accounts",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/*"
+    },
+    {
+      "name": "loans",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/accounts/new-account",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/credit-cards/credit-card-application",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/insurance/health-insurance",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/insurance/life-insurance",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/insurance/vehical-insurance",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/loans/car-loan/car-loan-application",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/loans/home-loan/home-loan-application",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/loans/personal-loan/personal-loan-application",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/loans/student-loan/student-loan-application",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/settings/add-external-account",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/settings/add-external-credit-card"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/accounts/new-account",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/*"
+    },
+    {
+      "name": "credit-card-application",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/accounts/new-account/new-account-form-submitted",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/credit-cards/credit-card-application/credit-card-application-submitted",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/loans/home-loan-form-submitted"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/accounts/new-account/new-account-form-submitted",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/*"
+    },
+    {
+      "name": "child-account-application-step-1",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/child-account-application-step-1",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/sign-in"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/child-account-application-step-1",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/*"
+    },
+    {
+      "name": "child-account-application-step-1-2",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/child-account-application-step-1/child-account-upgrade-submitted"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/child-account-application-step-1/child-account-upgrade-submitted",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/child-account-application-step-1/*"
+    },
+    {
+      "name": "create-account",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/create-account",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/create-account-test"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/create-account",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/*"
+    },
+    {
+      "name": "credit-cards",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/credit-cards"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/credit-cards",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/*"
+    },
+    {
+      "name": "credit-cards-2",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/credit-cards/credit-card-basic",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/credit-cards/credit-card-gold",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/credit-cards/credit-card-premium"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/credit-cards/credit-card-basic",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/credit-cards/*"
+    },
+    {
+      "name": "dashboard",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/dashboard"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/dashboard",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/*"
+    },
+    {
+      "name": "dashboard-2",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/dashboard/auto-save",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/dashboard/transfer-funds"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/dashboard/auto-save",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/dashboard/*"
+    },
+    {
+      "name": "dashboard-3",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/dashboard/submitted-successfully",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/submitted-successfully"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/dashboard/submitted-successfully",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/*"
+    },
+    {
+      "name": "how-to-consolidate-bank-accounts",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/how-to-consolidate-bank-accounts"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/how-to-consolidate-bank-accounts",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/*"
+    },
+    {
+      "name": "insurance",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/insurance"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/insurance",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/*"
+    },
+    {
+      "name": "loans-2",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/loans"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/loans",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/*"
+    },
+    {
+      "name": "loans-3",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/loans/car-loan",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/loans/home-loan",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/loans/personal-loan",
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/loans/student-loan"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/loans/car-loan",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/loans/*"
+    },
+    {
+      "name": "settings",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/settings"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/settings",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/*"
+    },
+    {
+      "name": "settings-2",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/settings/name-change-request"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/settings/name-change-request",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/settings/*"
+    },
+    {
+      "name": "settings-3",
+      "urls": [
+        "https://main--secur-financial-14-08--livedemoservices.aem.live/en/settings/sign-name-change-request"
+      ],
+      "representativeUrl": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/settings/sign-name-change-request",
+      "description": "To be named in naming step",
+      "blocks": [],
+      "urlPattern": "/en/settings/*"
+    }
+  ]
+}

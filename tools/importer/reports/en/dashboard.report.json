@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/dashboard",
+  "path": "en/dashboard",
+  "timestamp": "2026-10-23T13:38:51.814Z",
+  "title": "Dashboard",
+  "template": "eds-site",
+  "blocks": [
+    "columns",
+    "columns",
+    "columns",
+    "columns",
+    "columns"
+  ]
+}

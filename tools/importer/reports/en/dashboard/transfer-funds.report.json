@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/dashboard/transfer-funds",
+  "path": "en/dashboard/transfer-funds",
+  "timestamp": "2026-10-23T13:40:11.283Z",
+  "title": "Transfer funds",
+  "template": "eds-site",
+  "blocks": [
+    "transfer-funds"
+  ]
+}

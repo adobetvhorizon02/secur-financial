@@ -1,0 +1,11 @@
+{
+  "type": "da",
+  "sites": {
+    "secur-financial": {
+      "previewOrg": "adobetvhorizon02",
+      "previewSite": "secur-financial",
+      "contentHostUrl": "https://content.da.live/adobetvhorizon02/secur-financial/",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  }
+}

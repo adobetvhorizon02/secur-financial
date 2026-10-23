@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/settings/sign-name-change-request",
+  "path": "en/settings/sign-name-change-request",
+  "timestamp": "2026-10-23T13:40:07.178Z",
+  "title": "Sign Name Change Request",
+  "template": "eds-site",
+  "blocks": [
+    "iframe",
+    "action-button"
+  ]
+}

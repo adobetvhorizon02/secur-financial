@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/accounts/new-account/new-account-form-submitted",
+  "path": "en/accounts/new-account/new-account-form-submitted",
+  "timestamp": "2026-10-23T13:37:30.661Z",
+  "title": "New Account Form Submitted",
+  "template": "eds-site",
+  "blocks": [
+    "cards"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/settings/add-external-credit-card",
+  "path": "en/settings/add-external-credit-card",
+  "timestamp": "2026-10-23T13:37:48.466Z",
+  "title": "Add External Credit Card",
+  "template": "eds-site",
+  "blocks": [
+    "add-external"
+  ]
+}

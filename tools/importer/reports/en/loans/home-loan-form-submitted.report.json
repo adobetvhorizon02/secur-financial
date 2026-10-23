@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/loans/home-loan-form-submitted",
+  "path": "en/loans/home-loan-form-submitted",
+  "timestamp": "2026-10-23T13:37:19.383Z",
+  "title": "Home Loan Form Submitted",
+  "template": "eds-site",
+  "blocks": [
+    "cards"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/footer",
+  "path": "en/footer",
+  "timestamp": "2026-10-23T13:40:43.260Z",
+  "title": "Footer",
+  "template": "eds-site",
+  "blocks": [
+    "columns"
+  ]
+}

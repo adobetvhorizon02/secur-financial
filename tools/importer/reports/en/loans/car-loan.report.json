@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/loans/car-loan",
+  "path": "en/loans/car-loan",
+  "timestamp": "2026-10-23T13:38:41.633Z",
+  "title": "Car Loan",
+  "template": "eds-site",
+  "blocks": [
+    "product-card",
+    "loan-calculator",
+    "cards",
+    "cards"
+  ]
+}

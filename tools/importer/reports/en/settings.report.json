@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/settings",
+  "path": "en/settings",
+  "timestamp": "2026-10-23T13:40:25.823Z",
+  "title": "Settings",
+  "template": "eds-site",
+  "blocks": [
+    "cards",
+    "cards",
+    "cards",
+    "cards"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/credit-cards/credit-card-gold",
+  "path": "en/credit-cards/credit-card-gold",
+  "timestamp": "2026-10-23T13:37:42.193Z",
+  "title": "Credit Card Gold",
+  "template": "eds-site",
+  "blocks": [
+    "columns",
+    "product-card",
+    "columns"
+  ]
+}

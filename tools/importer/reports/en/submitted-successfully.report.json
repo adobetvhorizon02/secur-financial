@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/submitted-successfully",
+  "path": "en/submitted-successfully",
+  "timestamp": "2026-10-23T13:38:26.173Z",
+  "title": "Submitted Successfully",
+  "template": "eds-site",
+  "blocks": [
+    "cards"
+  ]
+}

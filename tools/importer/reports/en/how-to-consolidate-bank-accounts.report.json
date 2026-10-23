@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/how-to-consolidate-bank-accounts",
+  "path": "en/how-to-consolidate-bank-accounts",
+  "timestamp": "2026-10-23T13:38:47.465Z",
+  "title": "How To Consolidate Bank Accounts",
+  "template": "eds-site",
+  "blocks": [
+    "hero",
+    "columns"
+  ]
+}

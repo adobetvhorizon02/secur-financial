@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/insurance",
+  "path": "en/insurance",
+  "timestamp": "2026-10-23T13:38:09.960Z",
+  "title": "Insurance",
+  "template": "eds-site",
+  "blocks": [
+    "hero",
+    "product-card",
+    "product-card",
+    "product-card"
+  ]
+}
