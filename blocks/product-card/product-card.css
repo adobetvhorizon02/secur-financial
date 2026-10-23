@@ -1,19 +1,18 @@
 .product-card-block {
   margin: 0 auto;
   max-width: 100%;
-  padding: 0px;
+  padding: 0;
 }
+
 .product-card-block .product-card-body h3 {
   margin: 0;
-  font-size: 1.9rem;
   line-height: 1.25;
-  padding-top:0;
+  padding-top: 0;
+  font-size: 36px !important;
+  font-weight: 800;
+  font-family: var(--black-font-family);
 }
-.product-card-block .product-card-body h3 {
-    font-size: 36px !important;
-    font-weight: 800;
-    font-family: var(--black-font-family);
-}
+
 .product-card-block .cards {
   display: flex;
   justify-content: center;
@@ -32,8 +31,45 @@
   flex-direction: column;
 }
 
+.cards.product-card-block > ul > li {
+  background: transparent;
+}
+
+.cards.product-card-block.product-card-add-border > ul > li {
+  box-shadow: 0 3px 20px #00000010;
+  border: 1px solid var(--light-color);
+  border-radius: 4px;
+}
+
 .product-card-block .cards > ul > li.product-card-clickable {
   cursor: pointer;
+}
+
+.product-card-block .product-card-image {
+  position: relative;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.product-card-block .product-card-image picture {
+  display: block;
+}
+
+.product-card-block .product-card-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  aspect-ratio: 16 / 9;
+  max-height: 100%;
+}
+
+.product-card-block .product-card-body {
+  padding: 20px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .product-card-block .cards.product-card-layout-side-by-side > ul > li {
@@ -54,36 +90,11 @@
   padding: 24px;
 }
 
-.product-card-block .product-card-image {
-  position: relative;
-  background-color: transparent;
-  overflow: hidden;
-}
-
-.product-card-block .product-card-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  aspect-ratio: 16 / 9;
-  max-height: 100%;
-
-}
-
-.product-card-block .product-card-body {
-  padding: 20px;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-
 .reverse-position .product-card-block .cards.product-card-layout-side-by-side > ul > li {
-    flex-direction: row;
-    align-items: stretch;
-    flex-direction: row-reverse;
+  align-items: stretch;
+  flex-direction: row-reverse;
 }
+
 .product-card-block .product-card-category {
   font-size: 0.85rem;
   letter-spacing: 0.08em;
@@ -91,14 +102,16 @@
   color: var(--dark-color, #2d2d2d);
   margin-bottom: 0;
 }
+
 .product-card-layout-side-by-side p.product-card-category {
-    display: none;
+  display: none;
 }
+
 .product-card-block .product-card-description {
   margin: 0;
   font-size: 1rem;
   line-height: 1.6;
-  color: var(--text-color, #333333);
+  color: var(--text-color, #333);
 }
 
 .product-card-block .product-card-description ul {
@@ -117,17 +130,9 @@
 .cards.product-card-layout-compact-stacked-card {
   padding: 20px 50px;
 }
-.cards.product-card-layout-compact-stacked-card{
- padding: 20px 20px;
-}
-.cards.product-card-block > ul > li {
-    background: transparent;
-}
 
-.cards.product-card-block.product-card-add-border > ul > li {
-  box-shadow: 0 3px 20px #00000010;
-  border: 1px solid var(--light-color);
-  border-radius: 4px;
+.cards.product-card-layout-compact-stacked-card {
+  padding: 20px;
 }
 
 .cards.product-card-block.product-card-hide-description .product-card-description {
@@ -151,24 +156,26 @@
 }
 
 .cards.product-card-layout-compact-stacked-card .product-card-body h3 {
-    font-size: 24px !important;
+  font-size: 24px !important;
 }
 
-.cards.product-card-block .product-card-image--hidden ~ .product-card-body h3 {
-    font-size: 26px !important;
+.cards.product-card-block .product-card-image-hidden ~ .product-card-body h3 {
+  font-size: 26px !important;
 }
 
 @media (width >= 900px) {
-    main > .section > div.product-card-wrapper {
-        padding: 0px;
-    }
+  main > .section > div.product-card-wrapper {
+    padding: 0;
+  }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .product-card-block .cards.product-card-layout-side-by-side > ul > li {
     flex-direction: column;
   }
 }
-.custom-text-class .product-card-block a, .custom-text-class .product-card-block a:after{
-    color: #fff !important;
+
+.custom-text-class .product-card-block a,
+.custom-text-class .product-card-block a::after {
+  color: #fff !important;
 }
