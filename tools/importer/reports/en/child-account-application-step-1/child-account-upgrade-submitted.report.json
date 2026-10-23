@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/child-account-application-step-1/child-account-upgrade-submitted",
+  "path": "en/child-account-application-step-1/child-account-upgrade-submitted",
+  "timestamp": "2026-10-23T13:38:20.945Z",
+  "title": "Child Account Upgrade Submitted",
+  "template": "eds-site",
+  "blocks": [
+    "cards"
+  ]
+}

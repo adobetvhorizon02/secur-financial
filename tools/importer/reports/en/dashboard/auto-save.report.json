@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/dashboard/auto-save",
+  "path": "en/dashboard/auto-save",
+  "timestamp": "2026-10-23T13:37:12.682Z",
+  "title": "Auto Save",
+  "template": "eds-site",
+  "blocks": [
+    "set-up-auto-save"
+  ]
+}

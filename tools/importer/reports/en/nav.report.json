@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/nav",
+  "path": "en/nav",
+  "timestamp": "2026-10-23T13:40:39.267Z",
+  "title": "Header",
+  "template": "eds-site",
+  "blocks": [
+    "search"
+  ]
+}

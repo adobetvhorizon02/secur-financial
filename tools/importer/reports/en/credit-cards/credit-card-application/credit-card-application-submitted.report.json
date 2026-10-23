@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/credit-cards/credit-card-application/credit-card-application-submitted",
+  "path": "en/credit-cards/credit-card-application/credit-card-application-submitted",
+  "timestamp": "2026-10-23T13:37:36.799Z",
+  "title": "Credit Card Application Submitted",
+  "template": "eds-site",
+  "blocks": [
+    "cards"
+  ]
+}

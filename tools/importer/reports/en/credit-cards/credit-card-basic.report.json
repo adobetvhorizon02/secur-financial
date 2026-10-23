@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/credit-cards/credit-card-basic",
+  "path": "en/credit-cards/credit-card-basic",
+  "timestamp": "2026-10-23T13:37:07.683Z",
+  "title": "Credit Card Basic",
+  "template": "eds-site",
+  "blocks": [
+    "columns",
+    "product-card",
+    "columns"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/loans/personal-loan",
+  "path": "en/loans/personal-loan",
+  "timestamp": "2026-10-23T13:39:56.928Z",
+  "title": "Personal Loan",
+  "template": "eds-site",
+  "blocks": [
+    "product-card",
+    "loan-calculator",
+    "cards",
+    "cards"
+  ]
+}

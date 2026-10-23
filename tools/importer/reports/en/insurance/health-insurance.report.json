@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/insurance/health-insurance",
+  "path": "en/insurance/health-insurance",
+  "timestamp": "2026-10-23T13:38:31.721Z",
+  "title": "Health Insurance",
+  "template": "eds-site",
+  "blocks": [
+    "insurance"
+  ]
+}

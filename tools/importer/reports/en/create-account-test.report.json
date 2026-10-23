@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/create-account-test",
+  "path": "en/create-account-test",
+  "timestamp": "2026-10-23T13:38:36.464Z",
+  "title": "Create Account",
+  "template": "eds-site",
+  "blocks": [
+    "create-account"
+  ]
+}

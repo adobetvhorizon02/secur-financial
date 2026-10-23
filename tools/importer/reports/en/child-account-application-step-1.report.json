@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://main--secur-financial-14-08--livedemoservices.aem.live/en/child-account-application-step-1",
+  "path": "en/child-account-application-step-1",
+  "timestamp": "2026-10-23T13:39:32.058Z",
+  "title": "Child Account Application",
+  "template": "eds-site",
+  "blocks": [
+    "child-account-application"
+  ]
+}
