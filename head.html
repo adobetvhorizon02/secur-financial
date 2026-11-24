@@ -41,10 +41,12 @@
       .then((response) => (response.ok ? response.json() : Promise.reject(new Error(`HTTP ${response.status}`))))
       .then((json) => {
         const placeholders = {};
-        (json?.data || [])
-          .filter((row) => row && row.Key)
+        // Supports both { Key, Text } and { key, value } row formats
+        (Array.isArray(json?.data) ? json.data : [])
           .forEach((row) => {
-            placeholders[toCamelCase(row.Key)] = row.Text;
+            const key = row?.Key ?? row?.key;
+            if (!key) return;
+            placeholders[toCamelCase(key)] = row.Text ?? row.text ?? row.Value ?? row.value ?? '';
           });
         console.info('[launch] Placeholder "launch" value:', placeholders.launch);
         appendLaunchScript(pickLaunchUrl(placeholders));
