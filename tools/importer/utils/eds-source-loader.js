@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { captureProductCards, applyProductCards } from './product-card-content.js';
 
 /**
  * Source is an EDS site: import the undecorated authored content instead of the decorated DOM.
@@ -10,7 +11,10 @@ export default async function loadSourceContent(document) {
   const resp = await fetch(`${path}.plain.html`, { cache: 'no-store' });
   if (!resp.ok) throw new Error(`Failed to load ${path}.plain.html: ${resp.status}`);
   const html = await resp.text();
+  // runtime-loaded product-card content only exists in the rendered page
+  const productCards = await captureProductCards(document);
   document.body.innerHTML = `<main>${html}</main>`;
+  await applyProductCards(document, productCards);
 
   // the importer's pre-processing (before transform) strips <strong> inside headings;
   // authored bold headings render heavier, so keep them as <b> (still output as bold)

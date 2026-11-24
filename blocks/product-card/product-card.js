@@ -1,155 +1,68 @@
-import { readBlockConfig } from '../../scripts/aem.js';
-import { isAuthorEnvironment } from '../../scripts/scripts.js';
-import { getEnvironmentValue, getHostname } from '../../scripts/utils.js';
+import { resolveAnchorValue, toClassName } from '../../scripts/aem.js';
 
-const FALLBACK_PRODUCT = {
-  id: 'f0I76hY77',
-  name: 'Checking Account',
-  category: 'Accounts',
-  description: '<p>Easy, anytime access.</p><ul><li>Convenient ways to pay</li><li>24/7 security</li><li>Smart money management tools</li><li>Fraud protection</li></ul>',
-  sku: 'f0I76hY77',
-  image: 'https://main--demo-boilerplate--lamontacrook.hlx.page/en/media_1f909a9ffb576222b96b4fdf875def856037efc95.png',
-};
-
-const AUTHOR_PRODUCT_ENDPOINT = '/graphql/execute.json/secur-financial/product-card-information';
-const PUBLISH_PRODUCT_ENDPOINT = 'https://275323-918sangriatortoise.adobeioruntime.net/api/v1/web/dx-excshell-1/secure-financial-product-card-information';
-const PUBLISH_ENVIRONMENT = 'p189874-e1977911';
-let productCardApiConfigPromise;
-
-async function getProductCardApiConfig() {
-  if (!productCardApiConfigPromise) {
-    productCardApiConfigPromise = (async () => {
-      const placeholderHost = await getHostname();
-      const placeholderEnvironment = await getEnvironmentValue();
-      return {
-        authorBase: (placeholderHost || window.location.origin || '').replace(/\/$/, ''),
-        environment: placeholderEnvironment || PUBLISH_ENVIRONMENT,
-      };
-    })();
-  }
-  return productCardApiConfigPromise;
-}
+/*
+ * Product Card
+ * All content is authored in the block (no content fragment / GraphQL lookup).
+ * Rows are key / value pairs:
+ *   image        | picture (optional)
+ *   title        | product name
+ *   description  | rich text
+ *   product-id   | product SKU, appended to the CTA link as ?productId= (optional)
+ *   category     | product category, used for the data layer (optional)
+ *   layout       | side-by-side | stacked | compact-stacked-card
+ *   buttonText   | CTA label
+ *   link         | CTA link
+ *   ctastyle     | button | button-secondary | button-dark | link | default
+ *   hideDescription, addBorder | true / false
+ *   buttonEventType | data-button-event-type for the CTA (optional)
+ */
 
 function revealProductCardWrapper(block) {
   const wrapperElement = block.closest('.product-card-wrapper');
   if (wrapperElement) wrapperElement.classList.add('show');
 }
 
-function resolvePath(obj, path) {
-  if (!obj || !path) return undefined;
-  const tokens = path.split('.');
-  let current = obj;
-  for (let token of tokens) {
-    if (token === '') continue;
-    const arrayMatch = token.match(/^(.+?)\[(\d+)\]$/);
-    if (arrayMatch) {
-      const [, key, idx] = arrayMatch;
-      current = current?.[key];
-      if (!Array.isArray(current)) return undefined;
-      current = current[Number(idx)];
-    } else {
-      current = current?.[token];
-    }
-    if (current === undefined || current === null) return current;
-  }
-  return current;
+/** Map each key/value row to { key: valueCell } (keys normalized like readBlockConfig). */
+function readRows(block) {
+  const rows = {};
+  [...block.children].forEach((row) => {
+    const [keyCell, valueCell] = row.children;
+    if (!keyCell || !valueCell) return;
+    const key = toClassName(keyCell.textContent);
+    if (key) rows[key] = valueCell;
+  });
+  return rows;
 }
 
-function normalizeImageUrl(value) {
-  if (!value) return undefined;
-  const useAuthorUrl = isAuthorEnvironment();
-  let url;
-  if (typeof value === 'string') {
-    url = value;
-  } else if (useAuthorUrl) {
-    url = value?._authorUrl || value?._publishUrl || value?._dynamicUrl || value?.url;
-  } else {
-    url = value?._publishUrl || value?._authorUrl || value?._dynamicUrl || value?.url;
-  }
-  if (!url) return undefined;
-  try {
-    return new URL(url, window.location.href).href;
-  } catch (error) {
-    return url;
-  }
+function cellText(cell) {
+  return cell ? cell.textContent.trim() : '';
 }
 
-function pickProductFromResponse(payload) {
-  if (!payload) return undefined;
-
-  const fallbackPaths = [
-    'data.securFinancialProductByPath.item',
-    'data.productCardByPath.item',
-    'data.productByPath.item',
-    'data.productCard.item',
-    'data.productCard',
-    'data.product',
-    'product',
-    'item',
-    'items[0]',
-  ];
-
-  for (const path of fallbackPaths) {
-    const resolved = resolvePath(payload, path);
-    if (resolved) {
-      if (Array.isArray(resolved)) {
-        if (resolved.length) return resolved[0];
-        continue;
-      }
-      return resolved;
-    }
-  }
-
-  if (Array.isArray(payload)) return payload[0];
-  return payload;
+function cellLink(cell) {
+  const anchor = cell?.querySelector('a');
+  return anchor ? resolveAnchorValue(anchor) : cellText(cell);
 }
 
-function normalizeContentFragmentPath(rawPath) {
-  if (!rawPath) return '';
-  let path = String(rawPath).trim();
-  try {
-    const parsed = new URL(path);
-    path = parsed.pathname;
-  } catch (error) {
-    // ignore invalid URLs, treat value as relative path
+function readProduct(rows) {
+  const descriptionCell = rows.description;
+  let description = '';
+  if (descriptionCell) {
+    // single-line text arrives without a wrapping paragraph
+    description = descriptionCell.children.length
+      ? descriptionCell.innerHTML.trim()
+      : `<p>${descriptionCell.innerHTML.trim()}</p>`;
+    if (!cellText(descriptionCell)) description = '';
   }
-  const match = path.match(/(\/?content\/dam\/.+?)(?:\.html)?(?:$|\?)/);
-  if (match) path = match[1];
-  return path;
-}
-
-async function fetchProductData(contentFragmentPath) {
-  const isAuthor = isAuthorEnvironment();
-  const { authorBase, environment } = await getProductCardApiConfig();
-  const pathParam = contentFragmentPath ? `path=${contentFragmentPath}` : '';
-  const authorPathParam = pathParam ? `;${pathParam}` : '';
-  const publishPathParam = pathParam ? `&${pathParam}` : '';
-  const requestUrl = isAuthor
-    ? `${authorBase}${AUTHOR_PRODUCT_ENDPOINT};ts=${Date.now()}${authorPathParam}`
-    : `${PUBLISH_PRODUCT_ENDPOINT}?environment=${environment}&time=${Date.now()}${publishPathParam}`;
-
-  try {
-    const response = await fetch(requestUrl, {
-      method: 'GET',
-      headers: { Accept: 'application/json' },
-    });
-    if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
-    const payload = await response.json();
-    const rawProduct = pickProductFromResponse(payload);
-    if (!rawProduct) return FALLBACK_PRODUCT;
-    return {
-      id: rawProduct?.productSku,
-      name: rawProduct?.productName,
-      category: rawProduct?.productCategory,
-      description: rawProduct?.productDescription?.html,
-      sku: rawProduct?.productSku || rawProduct?.id,
-      image: normalizeImageUrl(rawProduct?.productImage)
-    };
-  } catch (error) {
-    /* eslint-disable-next-line no-console */
-    console.error('Product card API fetch failed', error);
-    return FALLBACK_PRODUCT;
-  }
+  const sku = cellText(rows['product-id'] || rows.productid || rows.sku);
+  return {
+    id: sku,
+    name: cellText(rows.title || rows.name),
+    category: cellText(rows.category),
+    description,
+    sku,
+    picture: rows.image?.querySelector('picture') || null,
+    image: rows.image?.querySelector('img') || null,
+  };
 }
 
 function appendProductIdToButton(buttonConfig, product) {
@@ -190,7 +103,7 @@ function publishProductToDataLayer(productPayload) {
       product: { ...productPayload },
       productId,
     },
-    true
+    true,
   );
 }
 
@@ -233,14 +146,11 @@ function makeCardClickable(card, buttonConfig, productPayload) {
 function createCard(product, buttonConfig) {
   const photo = document.createElement('div');
   photo.className = 'product-card-image';
-  const imageUrl = normalizeImageUrl(product.image);
-  if (imageUrl) {
-    const img = document.createElement('img');
-    img.src = imageUrl;
-    img.alt = product.name || 'Product image';
-    photo.appendChild(img);
+  if (product.image) {
+    if (!product.image.alt) product.image.alt = product.name || 'Product image';
+    photo.appendChild(product.picture || product.image);
   } else {
-    photo.classList.add('product-card-image--hidden');
+    photo.classList.add('product-card-image-hidden');
   }
 
   const body = document.createElement('div');
@@ -287,32 +197,25 @@ function createButtonFromConfig(config) {
   return { node: container };
 }
 
-export default async function decorate(block) {
+export default function decorate(block) {
   block.classList.add('product-card-block');
-  [...block.children].forEach((row) => { row.style.display = 'none'; });
   try {
-    const config = readBlockConfig(block) || {};
-    const rawContentFragmentPath =
-      config['content-fragment-folder'] || config.contentfragmentfolder || config.contentFragmentFolder || '';
-    const contentFragmentPath = normalizeContentFragmentPath(rawContentFragmentPath);
-    if (contentFragmentPath) {
-      block.dataset.contentFragmentPath = contentFragmentPath;
-    }
-    const layout = ['side-by-side', 'stacked', 'compact-stacked-card'].includes((config.layout || '').toLowerCase())
-      ? config.layout.toLowerCase()
+    const rows = readRows(block);
+    const product = readProduct(rows);
+    const layoutValue = cellText(rows.layout).toLowerCase();
+    const layout = ['side-by-side', 'stacked', 'compact-stacked-card'].includes(layoutValue)
+      ? layoutValue
       : 'stacked';
-    const hideDescription = isTruthy(config.hidedescription ?? config.hideDescription);
-    const addBorder = isTruthy(config.addborder ?? config.addBorder);
+    const hideDescription = isTruthy(cellText(rows.hidedescription));
+    const addBorder = isTruthy(cellText(rows.addborder));
     const buttonConfig = createButtonFromConfig({
-      text: config.buttontext,
-      link: config.link,
-      eventType: config.buttoneventtype,
-      style: config.ctastyle ?? 'default',
+      text: cellText(rows.buttontext),
+      link: rows.link ? cellLink(rows.link) : '',
+      eventType: cellText(rows.buttoneventtype),
+      style: cellText(rows.ctastyle) || 'default',
     });
-    [...block.children].forEach((row) => row.remove());
     block.innerHTML = '';
 
-    const product = await fetchProductData(contentFragmentPath);
     const productPayload = buildDatalayerProductPayload(product);
 
     const wrapper = document.createElement('div');

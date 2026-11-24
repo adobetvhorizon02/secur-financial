@@ -65,9 +65,9 @@ var CustomImportScript = (() => {
   function parse(element, { document }) {
     const [name, ...variants] = [...element.classList];
     const header = variants.length ? `${name} (${variants.join(", ")})` : name;
-    const cells = [...element.children].map((row) => {
-      const cols = [...row.children];
-      if (!cols.length) return [[...row.childNodes]];
+    const cells = [...element.children].map((row2) => {
+      const cols = [...row2.children];
+      if (!cols.length) return [[...row2.childNodes]];
       return cols.map((col) => col.childNodes.length ? [...col.childNodes] : "");
     });
     const block = WebImporter.Blocks.createBlock(document, { name: header, cells });
@@ -180,6 +180,111 @@ var CustomImportScript = (() => {
     }
   }
 
+  // tools/importer/utils/product-card-content.js
+  var PRODUCT_API = "https://275323-918sangriatortoise.adobeioruntime.net/api/v1/web/dx-excshell-1/secure-financial-product-card-information";
+  var PRODUCT_API_ENVIRONMENT = "p189874-e1977911";
+  var sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  function captureProductCards(document) {
+    return __async(this, null, function* () {
+      const blocks = () => [...document.querySelectorAll("main div.product-card")];
+      if (!blocks().length) return [];
+      for (let i = 0; i < 40; i += 1) {
+        if (blocks().every((b) => b.querySelector("li h3"))) break;
+        yield sleep(500);
+      }
+      return blocks().map((block) => {
+        const li = block.querySelector("li");
+        if (!li || !li.querySelector("h3")) return null;
+        const img = li.querySelector(".product-card-image img");
+        const desc = li.querySelector(".product-card-description");
+        const anchor = li.querySelector(".product-card-body a[href]");
+        let productId = "";
+        try {
+          productId = new URL(anchor.href).searchParams.get("productId") || "";
+        } catch (e) {
+        }
+        return {
+          title: li.querySelector("h3").textContent.trim(),
+          description: desc ? desc.innerHTML : "",
+          image: img ? img.src : "",
+          productId
+        };
+      });
+    });
+  }
+  function fetchProduct(cfPath) {
+    return __async(this, null, function* () {
+      var _a, _b, _c, _d, _e;
+      if (!cfPath) return null;
+      try {
+        const resp = yield fetch(`${PRODUCT_API}?environment=${PRODUCT_API_ENVIRONMENT}&path=${cfPath}`);
+        if (!resp.ok) return null;
+        const item = (_c = (_b = (_a = yield resp.json()) == null ? void 0 : _a.data) == null ? void 0 : _b.securFinancialProductByPath) == null ? void 0 : _c.item;
+        if (!item) return null;
+        return {
+          title: item.productName || "",
+          description: ((_d = item.productDescription) == null ? void 0 : _d.html) || "",
+          image: ((_e = item.productImage) == null ? void 0 : _e._publishUrl) || "",
+          productId: item.productSku || "",
+          category: item.productCategory || ""
+        };
+      } catch (e) {
+        return null;
+      }
+    });
+  }
+  function cleanDescription(document, html) {
+    const div = document.createElement("div");
+    div.innerHTML = html;
+    div.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
+    div.querySelectorAll("p").forEach((p) => {
+      if (!p.textContent.trim() && !p.querySelector("img")) p.remove();
+    });
+    return div.innerHTML.trim();
+  }
+  function row(document, key, value) {
+    const r = document.createElement("div");
+    const k = document.createElement("div");
+    k.textContent = key;
+    const v = document.createElement("div");
+    if (typeof value === "string") v.innerHTML = value;
+    else if (value) v.append(value);
+    r.append(k, v);
+    return r;
+  }
+  function applyProductCards(document, captured) {
+    return __async(this, null, function* () {
+      const blocks = [...document.querySelectorAll("main div.product-card")];
+      for (let i = 0; i < blocks.length; i += 1) {
+        const block = blocks[i];
+        const cfRow = [...block.children].find((r) => {
+          var _a;
+          return /^contentfragmentfolder$/i.test((_a = r.children[0]) == null ? void 0 : _a.textContent.trim());
+        });
+        const cfPath = cfRow ? cfRow.children[1].textContent.trim() : "";
+        const api = yield fetchProduct(cfPath);
+        const shown = captured[i] || api;
+        if (!shown) {
+          console.warn(`product-card ${i}: no content found for ${cfPath}`);
+          continue;
+        }
+        const rows = [];
+        if (shown.image) {
+          const img = document.createElement("img");
+          img.src = shown.image;
+          img.alt = shown.title;
+          rows.push(row(document, "image", img));
+        }
+        rows.push(row(document, "title", shown.title));
+        rows.push(row(document, "description", cleanDescription(document, shown.description)));
+        if (shown.productId) rows.push(row(document, "product-id", shown.productId));
+        if (api == null ? void 0 : api.category) rows.push(row(document, "category", api.category));
+        if (cfRow) cfRow.replaceWith(...rows);
+        else block.prepend(...rows);
+      }
+    });
+  }
+
   // tools/importer/utils/eds-source-loader.js
   function loadSourceContent(document) {
     return __async(this, null, function* () {
@@ -188,7 +293,9 @@ var CustomImportScript = (() => {
       const resp = yield fetch(`${path}.plain.html`, { cache: "no-store" });
       if (!resp.ok) throw new Error(`Failed to load ${path}.plain.html: ${resp.status}`);
       const html = yield resp.text();
+      const productCards = yield captureProductCards(document);
       document.body.innerHTML = `<main>${html}</main>`;
+      yield applyProductCards(document, productCards);
       document.querySelectorAll("main :is(h1, h2, h3, h4, h5, h6) strong").forEach((s) => {
         const b = document.createElement("b");
         b.append(...s.childNodes);
